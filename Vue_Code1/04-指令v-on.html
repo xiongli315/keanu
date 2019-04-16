@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <p>{{msg}}</p>
+
+        <!-- 给一个绑定绑定事件用 v-on指令 -->
+        <button v-on:click="fn">按钮</button>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        /**
+         * 指令：实现DOM操作
+         * 内置指令：Vue已经封装好的指令
+         * 一个指令的完整格式：
+         *      v-指令名称:指令参数.指令修饰符.指令修饰符 ="指令的值"
+         * 
+         * v-on: 用来绑定事件的
+         */
+
+        var vm= new Vue({
+             el:"#app",
+             data:{ //data是定义数据的地方
+                msg:'hello'
+             },
+             methods: {//定义方法, methods所定义的所有方法也都会被当前的Vue实例代理
+                 fn(){//当前方法的调用者是Vue实例
+                     console.log(1234);
+                     this.msg='zhangsan';
+                     this.show();
+                 },
+                 show(){
+                     alert('12455')
+                 }
+             },
+         })
+        console.log(vm);
+    </script>
+</body>
+</html>

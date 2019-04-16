@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div class="box">
+        <p>{{msg}}</p>
+    </div>
+
+    <p id="box">
+        {{'second:'+msg}}
+    </p>
+
+    <!-- 引入Vue.js -->
+    <script src="./vue.js"></script>
+    <script>
+        //创建Vue实例
+       var vm=new Vue({
+            el:".box",  //el所找到的第一个视图才是Vue实例负责解析的视图 
+            data:{
+                msg:'hello'
+            }
+        });
+        
+        //一个页面可以创建多个Vue实例，
+        new Vue({
+            el:"#box",
+            data:{
+                msg:'zhagnsanfeng'
+            }
+        })
+    </script>
+</body>
+</html>

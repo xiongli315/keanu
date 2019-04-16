@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <ul>
+            <!-- 
+                v-for 用于遍历数组，根据所遍历到的数组重复所在的元素
+                遍历数组的语法：
+                    v-for="(item,index) in/of arr"
+             -->
+            <li v-for="(myItem,i) in arr">{{i}} / {{myItem}}</li>
+        </ul>
+         
+        <!-- 
+            v-for 用于遍历对象
+            遍历对象的语法：
+                v-for="(value,key,index) in/of obj"
+        -->
+        <p>
+            <span v-for="(v,k,i) in obj">{{k}} : {{v}} / {{i}} <br/></span>
+        </p>
+
+         <!-- 
+            v-for 用于遍历数字或字符串
+            遍历数字的语法：
+                v-for="n in/of num"
+        -->
+        <ul>
+           <li v-for="n in 20">{{n}}</li>
+        </ul>
+        <ul>
+        <li v-for="(s,i) in 'hello'">{{s}} / {{i}}</li>
+        </ul>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        new Vue({
+            el:"#app",
+            data:{
+                arr:['AAAA','BBBB','3333'],
+                obj:{
+                    name:'zhagnsanfeng',
+                    age:20,
+                    sex:"男"
+                }
+            }
+        })
+    </script>
+</body>
+</html>

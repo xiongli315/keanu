@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="box">
+        <!-- 
+            {{表达式}} 插值表达式
+             
+            表达式的最终结果就是 {{表达式}}的结果
+
+            表达式：是变量或常量和运算符(/,?)组成的式子
+        
+            视图上所取的所有变量都是到解析当前视图的Vue实例对象上取
+         -->
+        <p>{{msg+',12345'}}</p>
+       
+    </div>
+
+    <!-- 引入Vue.js -->
+    <script src="./vue.js"></script>
+    <script>
+        //创建Vue实例
+       var vm=new Vue({
+            el:"#box",     //指定当前的Vue实例所解析的视图
+            data:{//定义数据层, 所有所定义的数据都会被代理到当前Vue实例上
+                msg:"hello,Vue",
+                name:'zhangsanfeng',
+            }
+        });
+        console.log(vm);
+        setTimeout(()=>{
+            vm.msg="hello,lisixi"; //数据和视图是响应的，即数据修改会自动导致视图变化
+        },3000);
+
+        //MVVM: Model           View            ViewModel
+        //     模型(即数据)     视图(结构)        视图模型
+        //Vue框架是将数据和视图分离
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <input type="text" @keydown.shift="send">
+        
+        <p>{{msg}}</p>
+        <input type="text" @keyup.up="send">
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        /**
+         * 指令：实现DOM操作
+         * 内置指令：Vue已经封装好的指令
+         * 一个指令的完整格式：
+         *      v-指令名称:指令参数.指令修饰符.指令修饰符 ="指令的值"
+         * 
+         * v-on: 用来绑定事件的
+            v-on:click 可以简写为 @click
+         */
+
+         //定义按键码的含义
+         Vue.config.keyCodes = {
+            v: 86,
+            f1: 112,        
+            // 取而代之的是 kebab-case 且用双引号括起来
+            "media-play-pause": 179,
+            up: [38, 87]
+        }
+
+        var vm= new Vue({
+             el:"#app",
+             data:{
+                 msg:""
+             },
+             methods: {
+                 send(e){
+                    //  if(e.keyCode==13){
+                         //按下enter时，
+                        this.msg=e.target.value
+                    // }
+                 }
+             },
+         })
+    </script>
+</body>
+</html>

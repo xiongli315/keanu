@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box1{
+            width: 100px;
+            height: 100px;
+            padding: 50px;
+            background: green;
+        }
+        .box2{
+            width: 100px;
+            height: 100px;
+            background: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <p>{{msg}}</p>
+
+        <!-- 给一个绑定绑定事件用 v-on指令
+            v-on指令的值可以是函数对象也可以是函数调用
+            如果是值是函数对象，则所调用的函数的第一个形式参数是事件对象
+            如果是值是函数调用，则调用的形式是怎样，函数的参数就是怎样
+        -->
+        <a href="http://www.baidu.com" target="_blank" v-on:click.prevent="fn">按钮</a>
+
+        <div v-on:click.capture="show1" class="box1">111
+            <div v-on:click="show" class="box2">22222</div>
+        </div>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        /**
+         * 指令：实现DOM操作
+         * 内置指令：Vue已经封装好的指令
+         * 一个指令的完整格式：
+         *      v-指令名称:指令参数.指令修饰符.指令修饰符 ="指令的值"
+         * 
+         * v-on: 用来绑定事件的
+         */
+ 
+        var vm= new Vue({
+             el:"#app",
+             data:{ //data是定义数据的地方
+                msg:'hello'
+             },
+             methods: {
+                 fn(){
+                    this.msg='zhangsan'+Math.random();
+                 },
+                 show(){
+                     console.log('2222')
+                 },
+                 show1(){
+                     console.log('1111')
+                 }
+             },
+         })
+    </script>
+</body>
+</html>

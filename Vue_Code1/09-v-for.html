@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <table>
+            <thead>
+                <tr>
+                    <th>姓名</th>
+                    <th>年龄</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- 遍历数组 -->
+                <tr v-for="item in persons">
+                    <!-- 遍历对象 -->
+                   <td v-for="d in item">{{d}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        new Vue({
+            el:"#app",
+            data:{
+                persons:[{
+                    name:"张三丰",
+                    age:21
+                },{
+                    name:"王二狗",
+                    age:31
+                },{
+                    name:"李四喜",
+                    age:23
+                }]
+            }
+        })
+    </script>
+</body>
+</html>

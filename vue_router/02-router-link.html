@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app"></div>
+    <script src="./vue.js"></script>
+    <script src="./vue-router.js"></script>
+    <script>
+         const Home={
+            name:"home",   //给组件命名
+            template:`<div>首页</div>`
+        }
+
+        const Goods={
+            name:'goods',   //组件命名
+            
+            template:`<div>商品页。。
+                    <button @click="goHome">跳转</button>
+                </div>`,
+            methods: {
+                goHome(){
+                    alert('准备要跳到首页...');
+                    //用js跳转
+                    //window.location='/home';
+                    console.log(this.$router);//路由对象
+                    this.$router.replace({name:'home'});//等效：<router-link to="">
+                    //replace 替换,将跳转的目标记录替换掉当前的记录
+                }
+            },
+        }
+        //3.创建路由对象，配置路由
+        const router=new VueRouter({
+            routes:[
+                {
+                    path:'/',           //路由记录
+                    component:Home,
+                    name:"home" //给当前路由记录命个名字
+                },
+                {
+                    path:'/goods',
+                    component:Goods,
+                    name:"goods"
+                },{
+                    path:'*',
+                    redirect:'/'    //重定向
+                }
+            ]
+        });
+        /**
+         * <router-link to="值">
+         * to属性值可以是：1)String, 表示待跳转的目录路径
+         *                2）Object: {path:'/', query:{},params:{},name:'' }
+         */
+        const App={
+            template:`<div id="app">
+                    <router-link :to="{path:'/',query:{name:'zhangsan',age:100}}">首页</router-link>
+                    <router-link :to="{name:'goods'}">商品</router-link>
+                    <router-view/>
+                </div>`
+        }
+        new Vue({
+            el:"#app",
+            render:h=>h('App'),  //等效： template:'<App/>'
+            components:{
+                App
+            },
+            router  //4.注册路由对象
+        })
+    </script>
+</body>
+</html>

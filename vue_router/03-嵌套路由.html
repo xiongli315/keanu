@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app">
+    </div>
+    <script src="./vue.js"></script>
+    <!-- 1.引入路由对象 -->
+    <script src="./vue-router.js"></script>
+    <script>
+        const Home = {
+            template: `<div>首页</div>`
+        }
+
+        const Food={
+            template:`<div><h3>食品...</h3></div>`
+        }
+        const Phone={
+            template:`<div><h3>手机...</h3></div>`
+        }
+
+        const Goods = { //商品路由是一个嵌套路由
+            template: `<div>
+                    <h1>商品页。。</h1>
+                    <p>
+                        <router-link to="/goods/phone">手机</router-link>  
+                        <router-link to="/goods/food">食品</router-link>      
+                    </p>
+                    <router-view/>
+                </div>`
+        }
+        //3.创建路由对象，配置路由
+        const router = new VueRouter({
+            routes: [{
+                    path: '/',
+                    component: Home
+                },
+                {
+                    path: '/goods',
+                    component: Goods,
+                    children:[  //配置嵌套的子路由
+                        {
+                            path:"phone",   //当前路径为：/goods/phone
+                            component:Phone,
+                            name:'phone',
+                        },
+                        {
+                            path:'food',    //当前路径为：/goods/food
+                            component:Food,
+                            name:'food'
+                        },{
+                            path:'/goods',
+                            redirect:'phone'
+                        }
+                    ]
+                }, {
+                    path: '*',
+                    redirect: '/' //重定向
+                }
+            ]
+        });
+
+        const App = { //组件选项
+            template: `<div id="app">
+                    <p>
+                        <router-link to="/">首页</router-link>
+                        <router-link to="/goods">商品</router-link>
+                    </p>
+                    <router-view/>
+                </div>`
+        }
+        new Vue({
+            el: "#app",
+            template: '<App/>',
+            components: {
+                App //等效:App:App
+            },
+            router //等效：router:router
+        })
+    </script>
+</body>
+
+</html>

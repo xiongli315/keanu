@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app"></div>
+    <script src="./vue.js"></script>
+    <script src="./vue-router.js"></script>
+    <script>
+        var isLogin=false;
+
+        const router = new VueRouter({
+            routes:[
+                {
+                    path:'/public',
+                    component:{
+                        template:`<div>Public...</div>`
+                    }
+                },
+                {
+                    path:'/protected',
+                    component:{
+                        template:`<div>Protected...</div>`
+                    },
+                    beforeEnter: (to, from, next) => {
+                        if(isLogin){    //跳转拦截
+                            next();
+                        }else{
+                            next('/login');
+                        }
+                    }
+                },
+                {
+                    path:'/login',
+                    component:{
+                        template:`<div>You must log in to view the page at /protected...
+                                <button @click="login">登录</button>
+                            </div>`,
+                        methods: {
+                            login(){
+                                isLogin=true;
+                                //登录成功，跳转到受保护页面
+                                this.$router.push('/protected');
+                                //让App的content改变为 Welcom<button></button>
+                                this.$emit('reveive','欢迎! <button>退出</button>')
+                            }
+                        },
+                    }
+                }
+            ]
+        })
+
+        const App={
+            template:`<div>
+                <p v-html="content"></p>
+                <ul>
+                    <li>
+                        <router-link to="/public">公共页面</router-link>
+                    </li>
+                    <li>
+                        <router-link to="/protected">受保护页面</router-link>
+                    </li>    
+                </ul>
+                <router-view @reveive="myRecive"/>
+                </div>`,
+            data() {
+                return {
+                    content:"你还没登录过"
+                }
+            },
+            methods:{
+                myRecive(val){
+                    console.log('app:',val);
+                    this.content=val;
+                }
+            }
+        }
+
+        new Vue({
+           template:`<App/>`,
+           router,
+           components:{
+               App
+           }
+        }).$mount('#app')
+    </script>
+</body>
+</html>

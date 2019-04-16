@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <p>
+            <router-link to="/">首页</router-link>
+            <router-link to="/goods">商品</router-link>
+        </p>
+        <router-view></router-view>
+    </div>
+    <script src="./vue.js"></script>
+    <script src="./vue-router.js"></script>
+    <script>
+        //在路由跳转过程中自动回调函数称为导航钩子
+        /**
+         * 全局的导航钩子:（2个）
+         *      router.beforeEach(to,from,next)
+         *      router.afterEach(to,from)
+         * 
+         * 路由级的导航钩子(1个)：
+         *      beforeEnter(to,from,next)
+         * 
+         * 组件级的导航钩子（3个）：
+         *      beforeRouteEnter(to,from,next)
+         *      beforeRouteUpdate(to,from,next):当路由跳转时，钩子函数所在的组件被复用了，该钩子函数才会调用
+         *      beforeRouteLeave(to,from,next)
+         * 
+         * 从Home跳转到Goods时的完整流程：
+         *      1. Home组件beforeRouteLeave调用，组件即将要离开
+         *      2. router.beforeEach调用，准备开始路由的跳转
+         *      3. Goods路由的 beforeEnter调用，进入了到商品路由
+         *      4.进入Goods组件，Goods组件的beforeRouteEnter调用
+         *      5.跳转结束，router.afterEach(to,from)回调
+         *      6.Goods实例出来，经历组件的生命周期
+         */
+
+        const Home={
+            template:`<div>Home...</div>`,
+            beforeRouteLeave(to,from,next){
+                console.log('1).Home组件的beforeRouteLeave...');
+                next();
+            },
+            beforeRouteEnter(to,from,next){
+                //该函数中无法访问当前实例
+                console.log('Home组件的beforeRouteEnter...');
+                next();
+            },
+        }
+        const Goods={
+            template:`<div>商品...</div>`,
+            beforeRouteLeave(to,from,next){
+                console.log('Goods组件的beforeRouteLeave...');
+                next();
+            },
+            beforeRouteEnter(to,from,next){
+                //该函数中无法访问当前实例
+                console.log('4).Goods组件的beforeRouteEnter...');
+                next();
+                // next(function(vm){
+                //     //该函数会在当前实例初始化完成后回调，而且会将初始化完成的实例传个函数的形参
+                // })
+            },
+            created() {
+                console.log('6).Goods组件created....')
+            },
+        }
+
+        const router = new VueRouter({
+            routes:[
+                {
+                    path:'/',
+                    component:Home,
+                    beforeEnter(to,from,next){
+                        console.log('home的路由级钩子：beforeEnter 调用了');
+                        next();
+                    }           
+                },
+                {
+                    path:'/goods',
+                    component:Goods,
+                    beforeEnter(to,from,next){
+                        console.log('3).goods的路由级钩子：beforeEnter 调用了');
+                        next();
+                    }           
+                }
+            ]
+        })
+
+        //准备开始跳转
+        router.beforeEach((to, from, next) => {
+            // to and from are both route objects. must call `next`.
+            console.log('2)全局级的钩子：router.beforeEach调用..');
+            next();
+        })
+        
+        router.afterEach((to, from) => {
+            // to and from are both route objects.
+            console.log('5)全局级的钩子：router.afterEach调用..');
+        })
+
+        new Vue({
+            el:"#app",
+            router
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- template元素：将若干个元素组成整体，自身在真实DOM中不占位 -->
+        <div :key="i"  v-for="(item,i) in arr"
+         :class="{active:i===num}" :style="{width:'100px'}">
+            <h1>{{i}}/{{item}}</h1>
+            <p>{{item}}</p>
+        </div>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        new Vue({
+            el:"#app",
+            data:{
+                num:2,
+                arr:[1111,2222,3333,2222],
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .active{
+            background: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <!-- 
+         常用的元素属性：
+            id,class,style,href,src,....
+
+            v-bind:class和v-bind:style相对于其他的属性有特殊
+
+            v-bind:class="指令值"
+            指令值可以是字符串,也可以是数组, 还可以是对象
+            v-bind:class 和class也可以同时存在
+
+            v-bind:style="指令值"
+            指令值可以是字符串,还可以是对象
+         -->
+         <div :style="'width:100px;height:'+h+'px;background:red;'"></div>
+         <div :style="{height:h+'px'}" style="width:100px;background:green;"></div>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        new Vue({
+            el:"#app",
+            data:{
+                h:50
+            }
+        })
+    
+    </script>
+</body>
+</html>

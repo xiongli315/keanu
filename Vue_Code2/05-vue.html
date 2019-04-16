@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .first{
+            background: pink;
+        }
+        .second{
+            background: yellow;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <ul>
+           <li v-for="(item, index) in arr" :class="{first:index%2==0,second:index%2!=0}">
+               <!-- contenteditable控制内容是否能编辑 -->
+               <span :contenteditable="item.isEdit" 
+               @blur="enter(index)">{{item.content}}</span>
+
+                <input type="button" value="删除" @click="remove(index)">
+                <input type="button" value="上移" @click="goUp(index)">
+                <input type="button" value="下移">
+                <input type="button" value="编辑" @click="doEdit(index)"/>
+           </li>
+        </ul>
+        <input type="text" v-model="msg" @keyup.enter="send">
+        <button @click="send">发布</button>
+    </div>
+    
+    <script src="./vue.js"></script>
+    <script>
+        new Vue({
+            el:"#app",
+            data:{
+                msg:"",
+                arr:[
+                        {
+                            content:"8点起床",
+                            isEdit:false//表示是否编辑
+                        },
+                        {
+                            content:"12点起床",
+                            isEdit:false    
+                        }
+                    ]
+            },
+            methods: {
+                doEdit(i){
+                    //编辑
+                    this.arr[i].isEdit=true;
+
+                },
+                enter(i){
+                    this.arr[i].isEdit=false;
+                },
+                send(){
+                    this.arr.push({content:this.msg});
+                    //将input清空
+                    this.msg="";
+                },
+                remove(index){
+                    //删除指定下标的元素
+                    this.arr.splice(index,1);
+                },
+                goUp(index){
+                    //上移
+                    //先把指定的元素删除并获取到
+                   var obj=this.arr.splice(index,1)[0];
+
+                   //插入
+                   this.arr.splice(index-1,0,obj);
+                }
+            },
+        })
+    </script>
+    <!-- 
+        Vue: 数据驱动视图的框架
+
+        new Vue({
+            el:'#app',
+            data:{
+                msg:''
+            },
+            methods:{
+                show(e){}
+            }
+        })
+
+        Vue的指令：实现DOM操作
+        1.v-on 绑定事件
+            v-on:click  简写为 @click
+            @click.stop.prevent="show($event,index)"
+
+        2.v-for: 列表渲染
+           用于遍历数组，根据所遍历的数组重复所在的元素
+           <div v-for="(item,i) in arr"></div>
+
+           <div v-for="(val,key,i) in obj"></div>
+        
+        3.v-model:将表单元素的输入值和指定的变量绑定
+     -->
+</body>
+</html>

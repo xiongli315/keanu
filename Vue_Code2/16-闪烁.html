@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- 将指定的变量值渲染到所在元素的innerText中 -->
+        <p v-text="msg"></p>
+
+        <div v-text="content"></div>
+        <div>{{content}}</div>
+
+          <!-- 将指定的变量值渲染到所在元素的innerHTML中 -->
+          <p v-html="content"></p>
+          <input type="text" v-model="content">
+    </div>
+
+    <script src="./vue.js"></script>
+    <script>
+        new Vue({
+            el:"#app",
+            data:{
+                msg:"hello",
+                content:'<h1>HELLO</h1>'
+            }
+        })
+    </script>
+</body>
+</html>

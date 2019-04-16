@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box{
+            width: 100px;
+            height: 100px;
+            background: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <input type="checkbox" v-model="isShow">
+        <!-- 
+            v-if="指令值": 控制所在的元素显示或隐藏，指令为true则显示，指令值为false则隐藏
+                原理：通过DOM操作控制元素显示隐藏， 显示时创建添加元素，隐藏时删除元素
+
+            v-show="指令值":控制所在的元素显示或隐藏，指令为true则显示，指令值为false则隐藏
+                原理：通过display样式控制元素显示隐藏， 隐藏时display:none, 显示时移除display:none
+         -->
+        <div class="box" v-show="isShow"></div>
+        
+        <!-- <div v-if="obj.person">
+            <p>{{obj.person.name}}</p>
+            <p>{{obj.person.age}}</p>
+        </div> -->
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        new Vue({
+            el:"#app",
+            data:{
+                isShow:true,
+                // obj:{}
+            }
+        })
+    </script>
+</body>
+</html>

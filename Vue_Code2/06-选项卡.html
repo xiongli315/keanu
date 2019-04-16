@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .tab{
+            width: 300px;
+            
+        }
+        .tab div{
+            border: 1px solid #000;
+            height: 300px;
+        }
+        .tab .btn{
+            width: 50px;
+            height: 30px;
+            border-radius: 5px;
+            margin-right: 5px;
+        }
+        .tab .active{
+            background: red;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+     <div id="app">
+        <div class="tab">
+            <button v-for="(item, index) in tabList"
+             class="btn"
+             :class="{active:index==num}"
+             @click="num=index">
+                {{item.title}}
+            </button>
+            
+            
+            <div>{{tabList[num].content}}</div>
+        </div>
+     </div>
+     <script src="./vue.js"></script>
+     <script>
+         new Vue({
+             el:"#app",
+             data:{
+                 num:0,
+                 tabList:[
+                     {
+                         title:'新闻',
+                         content:'新闻新闻新闻新闻新闻新闻新闻新闻'
+                     },{
+                         title:'娱乐',
+                         content:'娱乐娱乐娱乐娱乐娱乐娱乐娱乐'
+                     },{
+                         title:'体育',
+                         content:'体育体育体育体育体育体育'
+                     }
+                 ]
+             }
+         })
+     </script>
+</body>
+</html>

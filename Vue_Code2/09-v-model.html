@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <div>
+            <p>用户名:<input v-model="person.name"/></p>
+            <p>年龄:<input v-model.number="person.age"/></p>
+
+            <p>性别:<input type="radio" name="sex" value="男" v-model="person.sex"/>男
+                    <input type="radio" name="sex" value="女" v-model="person.sex"/>女
+            </p>
+
+            <p>是否同意卖身:
+                <!-- v-model="msg" checkbox在修改该变量时默认是设置true/false
+                    可以修改true或false显示的值：
+                        true-value="同意" false-value="不同意"
+                -->
+                <input type="checkbox" v-model="person.isAgree" true-value="同意" false-value="不同意">
+            </p>
+
+            <p>爱好:
+                <input type="checkbox" value="敲代码" v-model="person.favs">敲代码
+                <input type="checkbox" value="吃饭" v-model="person.favs">吃饭
+                <input type="checkbox" value="睡觉" v-model="person.favs">睡觉
+            </p>
+            <p>
+                家乡:
+                <select v-model="person.birth">
+                    <option value="shenzhen">深圳</option>
+                    <option  value="dongguan">东莞</option>
+                    <option value="guangzhou">广州</option>
+                </select>
+            </p>
+        </div>
+        <div>
+            输入的结果:<br/>
+            <strong v-for="(v,k) in person">{{k}}:{{v}}<br/></strong>
+        </div>
+
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        new Vue({
+            el:"#app",
+            data:{
+                person:{
+                    name:"",
+                    age:"",
+                    sex:"男",
+                    isAgree:'不同意',
+                    favs:['吃饭'],
+                    birth:'dongguan'
+                }
+            }
+        })
+    </script>
+</body>
+</html>

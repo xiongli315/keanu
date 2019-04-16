@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .box{
+            width: 200px;
+            height: 100px;
+            background: red;
+        }
+        .box2{
+            width: 200px;
+            height: 100px;
+             background: green;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <input type="checkbox" v-model="isShow">
+        <!-- v-if/v-else 切换相同元素时尽可能的复用
+            如果某个元素不希望被复用，则可一个不需要复用的元素添加不同的key值
+         -->
+        <p class="box" v-if="isShow">
+            <input type="text" key="1">
+            <strong>1111</strong>
+        </p>
+
+        <p class="box2" v-else>
+            <input type="text" key="2">
+            <strong>1111</strong>
+        </p>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        new Vue({
+            el:"#app",
+            data:{
+                isShow:true,
+            }
+        })
+    </script>
+</body>
+</html>

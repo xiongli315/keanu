@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <!-- 
+            v-bind 作用：将元素的指定属性和变量绑定
+            v-bind用法：
+                v-bind:元素属性="变量"
+
+            任何一个元素的任何属性(包括自定义属性)要取变量，都要用v-bind绑定
+
+            v-bind:属性 可以简写为 :属性
+         -->
+        <a v-bind:href="mUrl"  :myname="name">
+            百度{{mUrl}}
+        </a>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        new Vue({
+            el:"#app",
+            data:{
+                mUrl:"http://www.baidu.com",
+                name:'张三'
+            }
+        })
+    
+    </script>
+</body>
+</html>

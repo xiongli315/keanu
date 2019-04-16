@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app">
+        <div>
+            <!-- 
+                key属性作用: 用于Vue内部追踪所创建的元素,给同时创建的多个元素添加标识
+                在同一个父元素内的兄弟元素的key不能相同
+             -->
+            <p v-for="(item, index) in arr" :key="index+'p'">{{index}}/{{item}}</p>
+
+            <h1 v-for="(d, i) in arr2" :key="i+'h1'">{{i}}/{{d}}</h1>
+        </div>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        new Vue({
+            el:"#app",
+            data:{
+                arr:[1111,2222,3333,2222],
+                arr2:['aaa','bbbb']
+            }
+        })
+    </script>
+</body>
+</html>

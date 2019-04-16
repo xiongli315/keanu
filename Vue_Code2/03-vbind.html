@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .active{
+            background: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <!-- 
+         常用的元素属性：
+            id,class,style,href,src,....
+
+            v-bind:class和v-bind:style相对于其他的属性有特殊
+
+            v-bind:class="指令值"
+            指令值可以是字符串,也可以是数组, 还可以是对象
+         -->
+         <div v-bind:class="'box div'"></div>
+         <div v-bind:class="['box','box2']"></div>
+         <div v-bind:class="{box:true,box3:true,box2:false}"></div>
+         <div v-bind:class="['box',{box2:true,box4:false}]"></div>
+         <p>
+             <button v-for="n in 3" :class="{active:n==which}" @click="which=n">{{n}}</button>
+         </p>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+        new Vue({
+            el:"#app",
+            data:{
+                which:1
+            }
+        })
+    
+    </script>
+</body>
+</html>

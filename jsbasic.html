@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<!-- http://localhost:8099/springBootDemo//jsbasic.html -->
+<head>
+<meta charset="UTF-8">
+<title>Basic RadioButton - jQuery EasyUI Demo</title>
+<link rel="stylesheet" type="text/css"
+	href="./themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="./themes/icon.css">
+<link rel="stylesheet" type="text/css" href="./css/demo.css">
+<script type="text/javascript" src="./js/jquery.min.js"></script>
+<script type="text/javascript" src="./js/jquery.easyui.min.js"></script>
+</head>
+
+<body>
+	<li>你更喜欢哪种颜色?</li>
+	<li id="showchoose"><input type="radio" name="colors" id="red"
+		value="red">红色 <input type="radio" name="colors" id="blue"
+		value="blue">蓝色 <input type="radio" name="colors" id="green"
+		value="green">绿色 <input type="radio" name="colors" id="yellow"
+		value="yellow">黄色 <!-- <button type="button" onclick="displayResult()">显示 input 类型</button> -->
+	<li><input type="text" id="configText" value="default" /></li>
+</body>
+<script>
+	$(function() {
+		var arrs = [ {
+			id : 'red',
+			text : 'red;red;red'
+		}, {
+			id : 'blue',
+			text : 'blue;blue;blue'
+		}, {
+			id : 'green',
+			text : 'green;green;green'
+		}, {
+			id : 'yellow',
+			text : 'yellow;yellow;yellow'
+		} ];
+		//			document.getElementById("blue").onclick = function() {
+		//				alert("世界你好");
+		//				var x = document.getElementById("configText");
+		//				x.value = ("世界你好");
+		//				alert(x.value);
+		//			}
+
+		//			document.querySelector("#blue").onclick = function() {
+		//				alert("世界我好");
+		//			}
+
+		$("#showchoose input").bind("click", function() {
+			var vule = $(this).val();
+			$.ajax({
+				url : "http://localhost:8099/springBootDemo/mapperTest",
+				dataType : 'json',
+				success : function(data) {
+					var configs = data.configInfos;
+					//alert(configs[0].configId);
+					for (x in configs) {
+						if (configs[x].configId === vule) {
+							$("#configText").val(configs[x].configItem);
+						} else {
+						}
+					}
+				},
+				error : function(data) {
+					alert(data.result);
+				}
+
+			})
+
+		});
+	});
+
+	function displayResult() {
+		var x = document.getElementById("red").type;
+		alert(x);
+	}
+</script>
+
+</html>
